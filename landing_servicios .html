@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio — Plantillas Web Profesionales</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --black: #2c1a0e; --white: #ffffff; --gray: #f2ebe0; --mid: #8a7a6a; --accent: #4a3020; --gold: #8B6343; }
+  body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 80px; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid #ebebeb; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; letter-spacing: 6px; text-transform: uppercase; color: var(--black); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--black); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
+  .nav-links a:hover { color: var(--gold); }
+  .btn-dark { background: var(--black); color: var(--white); border: none; padding: 12px 32px; font-family: 'Inter'; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .btn-dark:hover { background: var(--gold); }
+  .btn-outline { background: transparent; color: var(--black); border: 1px solid var(--black); padding: 12px 32px; font-family: 'Inter'; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .btn-outline:hover { background: var(--black); color: var(--white); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 80px 80px; background: var(--white); position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--black), var(--gold)); }
+  .hero-inner { max-width: 800px; }
+  .hero-tag { font-size: 0.65rem; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; display: block; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 6rem); font-weight: 300; line-height: 1.05; margin-bottom: 32px; }
+  .hero h1 em { font-style: italic; }
+  .hero p { font-size: 0.92rem; color: var(--mid); line-height: 2; max-width: 560px; margin: 0 auto 48px; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-stats { display: flex; justify-content: center; gap: 60px; margin-top: 80px; padding-top: 60px; border-top: 1px solid #ebebeb; flex-wrap: wrap; }
+  .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; }
+  .hero-stat-label { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); margin-top: 4px; }
+
+  /* MARQUEE */
+  .marquee { background: var(--black); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+  .marquee-inner { display: inline-flex; animation: marquee 20s linear infinite; }
+  .marquee span { font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase; color: #4a4a4a; padding: 0 40px; }
+  .marquee span.gold { color: var(--gold); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SERVICIOS */
+  .servicios { padding: 120px 80px; background: var(--gray); }
+  .section-label { font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 300; margin-bottom: 60px; }
+  .servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .servicio-card { background: var(--white); padding: 48px 40px; transition: all 0.3s; position: relative; overflow: hidden; }
+  .servicio-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.4s; }
+  .servicio-card:hover::after { width: 100%; }
+  .servicio-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+  .servicio-num { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: #ebebeb; margin-bottom: 24px; }
+  .servicio-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 16px; }
+  .servicio-card p { font-size: 0.82rem; color: var(--mid); line-height: 1.9; margin-bottom: 28px; }
+  .servicio-features { list-style: none; margin-bottom: 32px; }
+  .servicio-features li { font-size: 0.78rem; color: var(--black); padding: 8px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 10px; }
+  .servicio-features li::before { content: '✦'; color: var(--gold); font-size: 0.6rem; flex-shrink: 0; }
+  .servicio-price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 24px; }
+  .servicio-price span { font-size: 0.8rem; font-family: 'Inter'; color: var(--mid); }
+  .badge-popular { position: absolute; top: 24px; right: 24px; background: var(--gold); color: white; font-size: 0.6rem; letter-spacing: 2px; padding: 4px 12px; text-transform: uppercase; }
+
+  /* PROCESO */
+  .proceso { padding: 120px 80px; background: var(--white); }
+  .proceso-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 60px; }
+  .proceso-step { position: relative; }
+  .proceso-step::after { content: '→'; position: absolute; right: -24px; top: 20px; color: #ebebeb; font-size: 1.2rem; }
+  .proceso-step:last-child::after { display: none; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: #ebebeb; margin-bottom: 16px; }
+  .step-icon { width: 48px; height: 48px; border: 1px solid #ebebeb; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .step-icon svg { width: 24px; height: 24px; stroke: var(--black); fill: none; stroke-width: 1.5; stroke-linecap: round; }
+  .proceso-step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 10px; }
+  .proceso-step p { font-size: 0.78rem; color: var(--mid); line-height: 1.8; }
+
+  /* PLANTILLAS */
+  .plantillas { padding: 120px 80px; background: var(--gray); }
+  .plantillas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .plantilla-card { background: var(--white); overflow: hidden; cursor: pointer; transition: all 0.3s; }
+  .plantilla-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+  .plantilla-preview { height: 240px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .plantilla-preview img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .plantilla-card:hover .plantilla-preview img { transform: scale(1.05); }
+  .plantilla-preview.kbeauty { background: linear-gradient(135deg, #e8d8c8, #d8c8b8); }
+  .plantilla-preview.moda { background: linear-gradient(135deg, #d8d0c8, #c8c0b0); }
+  .plantilla-preview.restaurante { background: linear-gradient(135deg, #c8b898, #b8a888); }
+  .plantilla-tag { position: absolute; top: 16px; left: 16px; background: var(--black); color: white; font-size: 0.6rem; letter-spacing: 2px; padding: 4px 10px; text-transform: uppercase; }
+  .plantilla-info { padding: 28px; }
+  .plantilla-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 8px; }
+  .plantilla-info p { font-size: 0.78rem; color: var(--mid); line-height: 1.7; margin-bottom: 16px; }
+  .plantilla-footer { display: flex; justify-content: space-between; align-items: center; }
+  .plantilla-price { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); }
+  .plantilla-btn { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 2px; cursor: pointer; transition: color 0.3s; background: none; border-left: none; border-right: none; border-top: none; font-family: 'Inter'; }
+  .plantilla-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* FAQ */
+  .faq { padding: 120px 80px; background: var(--white); max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid #ebebeb; }
+  .faq-question { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; }
+  .faq-question:hover { color: var(--gold); }
+  .faq-icon { font-size: 1.2rem; color: var(--mid); transition: transform 0.3s; flex-shrink: 0; }
+  .faq-answer { font-size: 0.82rem; color: var(--mid); line-height: 2; max-height: 0; overflow: hidden; transition: max-height 0.4s, padding 0.3s; }
+  .faq-answer.open { max-height: 200px; padding-bottom: 24px; }
+
+  /* CTA */
+  .cta { padding: 120px 80px; background: var(--black); text-align: center; }
+  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
+  .cta h2 em { font-style: italic; color: var(--gold); }
+  .cta p { font-size: 0.85rem; color: #7a7a7a; max-width: 480px; margin: 0 auto 48px; line-height: 1.9; }
+  .btn-gold { background: var(--gold); color: white; border: none; padding: 16px 48px; font-family: 'Inter'; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .btn-gold:hover { background: white; color: var(--black); }
+  .btn-outline-white { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 16px 40px; font-family: 'Inter'; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-left: 16px; }
+  .btn-outline-white:hover { background: white; color: var(--black); }
+
+  /* FOOTER */
+  footer { background: var(--black); border-top: 1px solid #1a1a1a; padding: 40px 80px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 6px; text-transform: uppercase; color: white; }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a { color: #4a4a4a; text-decoration: none; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 0.65rem; color: #3a3a3a; letter-spacing: 1px; }
+
+  @media(max-width:900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 60px; }
+    .servicios, .proceso, .plantillas, .cta { padding: 60px 24px; }
+    .faq { padding: 60px 24px; }
+    .servicios-grid { grid-template-columns: 1fr; }
+    .proceso-grid { grid-template-columns: repeat(2, 1fr); }
+    .plantillas-grid { grid-template-columns: 1fr; }
+    footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Studio</div>
+  <ul class="nav-links">
+    <li><a onclick="document.querySelector('.servicios').scrollIntoView({behavior:'smooth'})">Servicios</a></li>
+    <li><a onclick="document.querySelector('.plantillas').scrollIntoView({behavior:'smooth'})">Plantillas</a></li>
+    <li><a onclick="document.querySelector('.proceso').scrollIntoView({behavior:'smooth'})">Proceso</a></li>
+    <li><a onclick="document.querySelector('.faq').scrollIntoView({behavior:'smooth'})">FAQ</a></li>
+  </ul>
+  <button class="btn-dark" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20una%20plantilla%20web%20personalizada','_blank')">Contactar</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">✦ Diseño web profesional sin complicaciones</span>
+    <h1>Tu negocio merece<br>una web que <em>impresione</em></h1>
+    <p>Plantillas web profesionales y personalizadas para tu negocio. Diseño elegante, listo para publicar y adaptado a tu imagen de marca.</p>
+    <div class="hero-btns">
+      <button class="btn-dark" onclick="document.querySelector('.servicios').scrollIntoView({behavior:'smooth'})">Ver servicios</button>
+      <button class="btn-outline" onclick="document.querySelector('.plantillas').scrollIntoView({behavior:'smooth'})">Ver plantillas</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">3</div><div class="hero-stat-label">Plantillas disponibles</div></div>
+      <div><div class="hero-stat-num">48h</div><div class="hero-stat-label">Tiempo de entrega</div></div>
+      <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Personalizable</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>K-Beauty</span><span class="gold">✦</span>
+    <span>Moda</span><span class="gold">✦</span>
+    <span>Restaurante</span><span class="gold">✦</span>
+    <span>Catering</span><span class="gold">✦</span>
+    <span>Spa & Belleza</span><span class="gold">✦</span>
+    <span>Portfolio</span><span class="gold">✦</span>
+    <span>K-Beauty</span><span class="gold">✦</span>
+    <span>Moda</span><span class="gold">✦</span>
+    <span>Restaurante</span><span class="gold">✦</span>
+    <span>Catering</span><span class="gold">✦</span>
+    <span>Spa & Belleza</span><span class="gold">✦</span>
+    <span>Portfolio</span><span class="gold">✦</span>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="servicios">
+  <div class="section-label">✦ Lo que ofrezco</div>
+  <div class="section-title">Elige tu paquete</div>
+  <div class="servicios-grid">
+
+    <div class="servicio-card">
+      <div class="servicio-num">01</div>
+      <h3>Plantilla Basic</h3>
+      <p>Perfecta para empezar. Recibes la plantilla lista para personalizar tú mismo con tus colores, textos e imágenes.</p>
+      <ul class="servicio-features">
+        <li>Plantilla HTML completa</li>
+        <li>Diseño responsive móvil</li>
+        <li>Código limpio y comentado</li>
+        <li>Guía de personalización</li>
+        <li>1 revisión incluida</li>
+      </ul>
+      <div class="servicio-price">99 € <span>pago único</span></div>
+      <button class="btn-outline" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20el%20paquete%20Basic','_blank')">Solicitar</button>
+    </div>
+
+    <div class="servicio-card" style="border-top: 3px solid var(--gold);">
+      <div class="badge-popular">Más popular</div>
+      <div class="servicio-num">02</div>
+      <h3>Plantilla Standard</h3>
+      <p>La opción más completa. Personalización total con tus productos, colores, textos, WhatsApp y pagos configurados.</p>
+      <ul class="servicio-features">
+        <li>Todo lo del Basic</li>
+        <li>Personalización completa</li>
+        <li>Productos reales con fotos</li>
+        <li>WhatsApp y Stripe configurados</li>
+        <li>Redes sociales enlazadas</li>
+        <li>Política de privacidad</li>
+        <li>3 revisiones incluidas</li>
+      </ul>
+      <div class="servicio-price">199 € <span>pago único</span></div>
+      <button class="btn-dark" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20el%20paquete%20Standard','_blank')">Solicitar</button>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-num">03</div>
+      <h3>Plantilla Premium</h3>
+      <p>Todo incluido. Personalizamos, publicamos y configuramos tu web profesional lista para recibir clientes.</p>
+      <ul class="servicio-features">
+        <li>Todo lo del Standard</li>
+        <li>Dominio .com incluido (1 año)</li>
+        <li>Publicación en Netlify</li>
+        <li>SEO básico configurado</li>
+        <li>Formación de 30 min</li>
+        <li>Soporte 30 días</li>
+        <li>Revisiones ilimitadas</li>
+      </ul>
+      <div class="servicio-price">299 € <span>pago único</span></div>
+      <button class="btn-outline" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20el%20paquete%20Premium','_blank')">Solicitar</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso">
+  <div class="section-label">✦ Cómo funciona</div>
+  <div class="section-title">Del contacto a tu web<br>en 4 pasos</div>
+  <div class="proceso-grid">
+    <div class="proceso-step">
+      <div class="step-num">01</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <h4>Contacto</h4>
+      <p>Me escribes por WhatsApp y hablamos de tu negocio, sector y necesidades.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="step-num">02</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+      <h4>Propuesta</h4>
+      <p>Te envío la plantilla que mejor encaja y el presupuesto detallado.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="step-num">03</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h4>Desarrollo</h4>
+      <p>Personalizo tu plantilla con tu marca, productos y datos en 24-48h.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="step-num">04</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h4>Entrega</h4>
+      <p>Recibes tu web lista para publicar o la publicamos juntos si elegiste Premium.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLANTILLAS -->
+<section class="plantillas">
+  <div class="section-label">✦ Catálogo</div>
+  <div class="section-title">Plantillas disponibles</div>
+  <div class="plantillas-grid">
+    <div class="plantilla-card">
+      <div class="plantilla-preview kbeauty">
+        <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80" alt="K-Beauty plantilla">
+        <div class="plantilla-tag">K-Beauty</div>
+      </div>
+      <div class="plantilla-info">
+        <h3>Sōka — K-Beauty</h3>
+        <p>Diseño elegante y minimalista para marcas de cosmética coreana. Con sección de productos, rituales y newsletter.</p>
+        <div class="plantilla-footer">
+          <div class="plantilla-price">desde 29 €</div
+    <!-- PREVIEW -->
+    <a href="demo/kbeauty.html" target="_blank" class="plantilla-btn">
+      Preview
+    </a>
+          <button class="plantilla-btn" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20la%20plantilla%20K-Beauty','_blank')">Solicitar →</button>
+        </div>
+      </div>
+    </div>
+    <div class="plantilla-card">
+      <div class="plantilla-preview moda">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Moda plantilla">
+        <div class="plantilla-tag">Moda</div>
+      </div>
+      <div class="plantilla-info">
+        <h3>Séra — Moda de lujo</h3>
+        <p>Landing page elegante para marcas de moda con tienda integrada, lookbook y categorías de productos.</p>
+        <div class="plantilla-footer">
+          <div class="plantilla-price">desde 99 €</div>
+     <!-- PREVIEW -->
+    <a href="demo/moda.html" target="_blank" class="plantilla-btn">
+      Preview
+    </a>
+          <button class="plantilla-btn" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20la%20plantilla%20de%20Moda','_blank')">Solicitar →</button>
+        </div>
+      </div>
+    </div>
+    <div class="plantilla-card">
+      <div class="plantilla-preview restaurante">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Restaurante plantilla">
+        <div class="plantilla-tag">Restaurante</div>
+      </div>
+      <div class="plantilla-info">
+        <h3>La Leña — Restaurante</h3>
+        <p>Diseño rústico y acogedor con carta interactiva, formulario de reservas y sección de takeaway.</p>
+        <div class="plantilla-footer">
+          <div class="plantilla-price">desde 99 €</div>
+       <!-- PREVIEW -->
+    <a href="demo/restaurante.html" target="_blank" class="plantilla-btn">
+      Preview
+    </a>
+          <button class="plantilla-btn" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20la%20plantilla%20de%20Restaurante','_blank')">Solicitar →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div style="text-align:center;margin-bottom:60px;">
+    <div class="section-label" style="text-align:center;">✦ Preguntas frecuentes</div>
+    <div class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.5rem);font-weight:300;">FAQ</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">¿Cuánto tiempo tardas en entregar? <span class="faq-icon">+</span></div>
+    <div class="faq-answer">El paquete Basic se entrega en 24h. El Standard en 48h y el Premium en 72h desde que recibo toda la información de tu negocio.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">¿Necesito saber programar? <span class="faq-icon">+</span></div>
+    <div class="faq-answer">No. Con el paquete Standard y Premium me encargo de todo. Con el Basic recibes una guía paso a paso para que puedas personalizarlo tú mismo fácilmente.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">¿Puedo pedir una plantilla de otro sector? <span class="faq-icon">+</span></div>
+    <div class="faq-answer">¡Por supuesto! Puedo crear plantillas para cualquier sector: spa, fotografía, fitness, inmobiliaria, catering y más. Contáctame y lo hablamos.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">¿Cómo se realiza el pago? <span class="faq-icon">+</span></div>
+    <div class="faq-answer">Acepto Bizum para España y Stripe para pagos internacionales. El pago se realiza antes de empezar el trabajo.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">¿La web funciona en móvil? <span class="faq-icon">+</span></div>
+    <div class="faq-answer">Sí, todas las plantillas están completamente optimizadas para móvil, tablet y escritorio.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">¿Puedo añadir más productos después? <span class="faq-icon">+</span></div>
+    <div class="faq-answer">Sí. Una vez entregada la web puedes contactarme para añadir nuevos productos o secciones. Los cambios menores tienen coste reducido.</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="section-label" style="color:#5a5a5a;">✦ ¿Listo para empezar?</div>
+  <h2>Tu web profesional<br>a un <em>mensaje</em> de distancia</h2>
+  <p>Escríbeme por WhatsApp y en menos de 24h tienes tu presupuesto. Sin complicaciones, sin sorpresas.</p>
+  <button class="btn-gold" onclick="window.open('https://wa.me/34623534336?text=Hola!%20Me%20interesa%20una%20plantilla%20web%20personalizada%20para%20mi%20negocio','_blank')">💬 Contactar por WhatsApp</button>
+  <button class="btn-outline-white" onclick="document.querySelector('.plantillas').scrollIntoView({behavior:'smooth'})">Ver plantillas</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Studio</div>
+  <div class="footer-links">
+    <a onclick="document.querySelector('.servicios').scrollIntoView({behavior:'smooth'})">Servicios</a>
+    <a onclick="document.querySelector('.plantillas').scrollIntoView({behavior:'smooth'})">Plantillas</a>
+    <a onclick="document.querySelector('.proceso').scrollIntoView({behavior:'smooth'})">Proceso</a>
+    <a onclick="document.querySelector('.faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
+  </div>
+  <div class="footer-copy">© 2026 Studio. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    var answer = el.nextElementSibling;
+    var icon = el.querySelector('.faq-icon');
+    var isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-answer').forEach(function(a) { a.classList.remove('open'); });
+    document.querySelectorAll('.faq-icon').forEach(function(i) { i.textContent = '+'; });
+    if (!isOpen) { answer.classList.add('open'); icon.textContent = '−'; }
+  }
+</script>
+
+</body>
+</html>
